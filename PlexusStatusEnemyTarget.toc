@@ -1,0 +1,18 @@
+## Interface: 90207
+## Interface-Retail: 90207
+## Interface-Classic: 11403
+## Interface-BCC: 20504
+## Version: @project-version@
+## Title: PlexusStatusEnemyTarget
+## Notes: Show who is targeted by at least one enemy, and the casting progress of the incoming spell.
+## Dependencies: Plexus
+## Author: Doadin
+## X-Credits: Greltok, Jerry, jlam, Phanx, Pastamancer, Maia
+## X-Curse-Project-ID: 689512
+## Dependencies: Plexus
+
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\AceTimer-3.0\AceTimer-3.0.lua
+
+PlexusStatusEnemyTarget.lua

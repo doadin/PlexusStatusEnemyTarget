@@ -8,7 +8,7 @@
 ## Notes: Show who is targeted by at least one enemy, and the casting progress of the incoming spell.
 ## Dependencies: Plexus
 ## Author: Doadin
-## X-Credits: Greltok, Jerry, jlam, Phanx, Pastamancer, Maia
+## X-Credits: warbabyy
 ## X-Curse-Project-ID: 689512
 ## Dependencies: Plexus
 

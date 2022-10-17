@@ -1,4 +1,4 @@
-package-as: Plexus
+package-as: PlexusStatusEnemyTarget
 
 enable-nolib-creation: no
 

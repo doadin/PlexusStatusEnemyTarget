@@ -12,6 +12,8 @@
 ## X-Curse-Project-ID: 689512
 ## Dependencies: Plexus
 
+## IconTexture: Interface\AddOns\Plexus\Media\icon
+
 Libs\LibStub\LibStub.lua
 Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
 Libs\AceTimer-3.0\AceTimer-3.0.lua

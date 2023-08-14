@@ -258,9 +258,12 @@ function PlexusStatusEnemyTarget:OnUpdate()
     end
 end
 
-local icon_map = {
-    [GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
-}
+local icon_map
+if Plexus:IsRetailWow() or Plexus:IsWrathWow() then
+    icon_map = {
+        --[GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
+    }
+end
 
 local ICON_TEX_COORDS = { left = 0.06, right = 0.94, top = 0.06, bottom = 0.94 }
 

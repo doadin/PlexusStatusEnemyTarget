@@ -261,6 +261,11 @@ end
 local icon_map
 if Plexus:IsRetailWow() or Plexus:IsWrathWow() then
     icon_map = {
+        [GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
+    }
+end
+if Plexus:IsClassicWow() then
+    icon_map = {
         --[GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
     }
 end

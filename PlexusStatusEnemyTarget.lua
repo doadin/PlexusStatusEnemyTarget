@@ -27,7 +27,7 @@ local GetRaidTargetIndex = _G.GetRaidTargetIndex
 local Plexus = _G.Plexus
 local PlexusRoster = Plexus:GetModule("PlexusRoster")
 
-PlexusStatusEnemyTarget = Plexus:GetModule("PlexusStatus"):NewModule("PlexusStatusEnemyTarget", "AceTimer-3.0")
+local PlexusStatusEnemyTarget = Plexus:GetModule("PlexusStatus"):NewModule("PlexusStatusEnemyTarget", "AceTimer-3.0")
 PlexusStatusEnemyTarget.menuName = L["Enemy incoming spell"]
 
 --{{{ AceDB defaults

@@ -17,7 +17,7 @@ end
 local UnitCastingInfo = _G.UnitCastingInfo
 local UnitChannelInfo = _G.UnitChannelInfo
 local UnitGUID = _G.UnitGUID
-local GetSpellInfo = _G.C_Spell.GetSpellInfo or _G.GetSpellInfo
+local GetSpellInfo = _G.C_Spell and _G.C_Spell.GetSpellInfo or _G.GetSpellInfo
 local UnitInRaid = _G.UnitInRaid
 local UnitInParty = _G.UnitInParty
 local GetTime = _G.GetTime
@@ -105,11 +105,11 @@ function PlexusStatusEnemyTarget:IsHostileNpcUnit(guid, flag)
 end
 
 local function getSpellName(spellid)
-    return C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
+    return C_Spell and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
 end
 
 local function getSpellIcon(spellid)
-    return C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
+    return C_Spell and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
 end
 
 function PlexusStatusEnemyTarget:COMBAT_LOG_EVENT_UNFILTERED()

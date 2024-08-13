@@ -17,7 +17,7 @@ end
 local UnitCastingInfo = _G.UnitCastingInfo
 local UnitChannelInfo = _G.UnitChannelInfo
 local UnitGUID = _G.UnitGUID
-local GetSpellInfo = _G.GetSpellInfo
+local GetSpellInfo = _G.C_Spell.GetSpellInfo or _G.GetSpellInfo
 local UnitInRaid = _G.UnitInRaid
 local UnitInParty = _G.UnitInParty
 local GetTime = _G.GetTime
@@ -104,15 +104,23 @@ function PlexusStatusEnemyTarget:IsHostileNpcUnit(guid, flag)
     return not PlexusRoster:IsGUIDInRaid(guid)
 end
 
+local function getSpellName(spellid)
+    return C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
+end
+
+local function getSpellIcon(spellid)
+    return C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
+end
+
 function PlexusStatusEnemyTarget:COMBAT_LOG_EVENT_UNFILTERED()
     local timestamp, event, hideCaster, sid, sname, sflag, srflag, tid, tname, tflag, trflag, spellid = _G.CombatLogGetCurrentEventInfo()
     if event=="SPELL_CAST_START" then
         if self:IsHostileNpcUnit(sid, sflag) then
-            spellstarts[sid] = GetSpellInfo(spellid)   --save spell name for next checking target of the caster GUID
+            spellstarts[sid] = getSpellName(spellid)   --save spell name for next checking target of the caster GUID
             spellstarts_channel[sid] = nil
         end
     elseif event=="SPELL_CAST_SUCCESS" then
-        local spell_name = GetSpellInfo(spellid)
+        local spell_name = getSpellName(spellid)
         if castings[sid] then  --normal cast, success is finish casting
             self:TryToStop(sid)
         elseif self:IsHostileNpcUnit(sid, sflag) then
@@ -261,12 +269,12 @@ end
 local icon_map
 if Plexus:IsRetailWow() or Plexus:IsWrathWow() or Plexus:IsCataWow() then
     icon_map = {
-        [GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
+        [getSpellName(70541)] = getSpellIcon(528), --invest for lichking
     }
 end
 if Plexus:IsClassicWow() then
     icon_map = {
-        --[GetSpellInfo(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
+        --[getSpellName(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
     }
 end
 

@@ -105,11 +105,11 @@ function PlexusStatusEnemyTarget:IsHostileNpcUnit(guid, flag)
 end
 
 local function getSpellName(spellid)
-    return C_Spell and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
+    return C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
 end
 
 local function getSpellIcon(spellid)
-    return C_Spell and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
+    return C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
 end
 
 function PlexusStatusEnemyTarget:COMBAT_LOG_EVENT_UNFILTERED()

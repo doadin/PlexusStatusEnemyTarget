@@ -213,10 +213,30 @@ function PlexusStatusEnemyTarget:OnUpdate()
 
     table.wipe(newcount)
 
-    self:UpdateUnit("focus")
-    self:UpdateUnit("mouseover")
-    self:UpdateUnit("boss1") self:UpdateUnit("boss2") self:UpdateUnit("boss3") self:UpdateUnit("boss4")
-    self:UpdateUnit("arena1") self:UpdateUnit("arena2") self:UpdateUnit("arena3") self:UpdateUnit("arena4") self:UpdateUnit("arena5")
+    if UnitExists("focus") and UnitIsEnemy("player", "focus") then
+        self:UpdateUnit("focus")
+    end
+    if UnitExists("mouseover") and UnitIsEnemy("player", "mouseover") then
+        self:UpdateUnit("mouseover")
+    end
+    if UnitExists("target") and UnitIsEnemy("player", "target") then
+        self:UpdateUnit("target")
+    end
+    for i=1,10 do
+        if UnitExists("boss" .. i) and UnitIsEnemy("player", "boss" .. i) then
+            self:UpdateUnit("boss" .. i)
+        end
+    end
+    for i=1,40 do
+        if UnitExists("nameplate" .. i) and UnitIsEnemy("player", "nameplate" .. i) then
+            self:UpdateUnit("nameplate" .. i)
+        end
+    end
+    for i=1,5 do
+        if UnitExists("arena" .. i) and UnitIsEnemy("player", "arena" .. i) then
+            self:UpdateUnit("arena" .. i)
+        end
+    end
     for guid, unitid in PlexusRoster:IterateRoster() do
         self:UpdateUnit(targets[unitid])
     end

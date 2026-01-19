@@ -104,12 +104,24 @@ function PlexusStatusEnemyTarget:IsHostileNpcUnit(guid, flag)
     return not PlexusRoster:IsGUIDInRaid(guid)
 end
 
-local function getSpellName(spellid)
-    return C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).name or GetSpellInfo(spellid)
+local function getSpellName(spellID)
+    if C_Spell and C_Spell.GetSpellInfo then
+        local info = C_Spell.GetSpellInfo(spellID)
+        if info and info.name then
+            return info.name
+        end
+    end
+    return GetSpellInfo(spellID)
 end
 
-local function getSpellIcon(spellid)
-    return C_Spell and C_Spell.GetSpellInfo and C_Spell.GetSpellInfo(spellid).iconID or select(3,GetSpellInfo(spellid))
+local function getSpellIcon(spellID)
+    if C_Spell and C_Spell.GetSpellInfo then
+        local info = C_Spell.GetSpellInfo(spellID)
+        if info and info.iconID then
+            return info.iconID
+        end
+    end
+    return select(3, GetSpellInfo(spellID))
 end
 
 function PlexusStatusEnemyTarget:COMBAT_LOG_EVENT_UNFILTERED()
@@ -287,14 +299,14 @@ function PlexusStatusEnemyTarget:OnUpdate()
 end
 
 local icon_map
-if not Plexus:IsClassicWow() then
-    icon_map = {
-        [getSpellName(70541)] = getSpellIcon(528), --invest for lichking
-    }
-end
-if Plexus:IsClassicWow() then
+
+if Plexus:IsClassicWow() or Plexus:IsTBCWow() then
     icon_map = {
         --[getSpellName(70541)] = select(3, GetSpellInfo(528)), --invest for lichking
+    }
+else
+    icon_map = {
+        [getSpellName(70541)] = getSpellIcon(528), --invest for lichking
     }
 end
 

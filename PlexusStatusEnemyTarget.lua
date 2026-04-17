@@ -177,7 +177,9 @@ function PlexusStatusEnemyTarget:OnStatusEnable(status)
         end
 
         if (status=="alert_et_incoming") then
-            self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+            if not Plexus:IsRetailWow() then
+                self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+            end
             self:RegisterEvent("UNIT_SPELLCAST_CHANNEL_STOP", "UnitCastStop") --caster stop manually, only for players.
             self:RegisterEvent("UNIT_SPELLCAST_STOP", "UnitCastStop")
             self:RegisterEvent("PLAYER_REGEN_DISABLED", "ResetVariables")
@@ -197,7 +199,9 @@ function PlexusStatusEnemyTarget:OnStatusDisable(status)
         end
 
         if (status=="alert_et_incoming") then
-            self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+            if not Plexus:IsRetailWow() then
+                self:UnregisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
+            end
             self:UnregisterEvent("UNIT_SPELLCAST_CHANNEL_STOP") --caster stop manually, only for players.
             self:UnregisterEvent("UNIT_SPELLCAST_STOP")
             self:UnregisterEvent("PLAYER_REGEN_DISABLED")
